@@ -7,7 +7,7 @@ public class PlayerControl : MonoBehaviour
 	public float jumpForce;
 	public Rigidbody2D playerRB;
 
-	public SpriteRenderer playerSpriteRenderer;
+
 	bool canJump;
 
 	public MusicManager musicManager;
@@ -36,22 +36,20 @@ public class PlayerControl : MonoBehaviour
 		if (Input.GetKey (KeyCode.LeftArrow)) 
 		{
 			playerRB.AddForce (new Vector2 (-playerSpeed, 0));
-			//playerRB.velocity += new Vector2 (-playerSpeed * Time.deltaTime,0);
-			//playerSpriteRenderer.flipX = true;
+		
 		}
 
 
 		if (Input.GetKey (KeyCode.RightArrow)) 
 		{
 			playerRB.AddForce (new Vector2 (playerSpeed, 0));
-			//playerRB.velocity += new Vector2 (playerSpeed * Time.deltaTime,0);
-			//playerSpriteRenderer.flipX = false;
+
 
 		} 
 
 	}
 
-	//	OnTriggerEnter is called when the Collider enters the trigger.
+	//	When the bottom of the player first touches a platform the player will be able to jump
 
 	void OnTriggerEnter2D (Collider2D playerEnterTrigger)
 	{
@@ -62,7 +60,7 @@ public class PlayerControl : MonoBehaviour
 			
 	}
 
-	//OnTriggerStay is called almost all the frames for every Collider other that is touching the trigger.
+	//OnTriggerStay is called almost all the frames the player is in contact with a platform. Player can still jump
 	void OnTriggerStay2D (Collider2D playerStayTrigger)
 	{
 		if (playerStayTrigger.gameObject.tag == "Platform") 
@@ -71,7 +69,8 @@ public class PlayerControl : MonoBehaviour
 		}
 	}
 
-	//OnTriggerExit is called when the Collider other has stopped touching the trigger.
+	//OnTriggerExit is called when the Collider has stopped touching the trigger. So when the player is up in the air jumping will be disabled to prevent 
+	//the player from flying accross the level
 	void OnTriggerExit2D (Collider2D playerExitTrigger)
 	{
 		if (playerExitTrigger.gameObject.tag == "Platform") 

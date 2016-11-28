@@ -3,10 +3,12 @@ using System.Collections;
 
 public class CamCtrl : MonoBehaviour 
 {
-	public float TargetFOV;
+	float TargetFOV;
+	public float startCamDis;
 	public float Speed = 1f; //Will reach target value in 1sec. 2f will make it achieve in half second (1f/2f)... and so on!
 	public Rigidbody2D playerRB;
 	bool zoomHit = false;
+	public float zoomHitDis;
 
 	// Use this for initialization
 	void Start () {
@@ -18,14 +20,14 @@ public class CamCtrl : MonoBehaviour
 	{
 		if (zoomHit == false) 
 		{
-			TargetFOV = playerRB.velocity.magnitude + 18f;
+			TargetFOV = playerRB.velocity.magnitude + startCamDis;
 			Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView,TargetFOV * 3,Speed * Time.deltaTime);
 		}
 
 		if (zoomHit == true) 
 		{
 
-			Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView,100,1 * Time.deltaTime);
+			Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView,zoomHitDis,1 * Time.deltaTime);
 		}
 
 	
