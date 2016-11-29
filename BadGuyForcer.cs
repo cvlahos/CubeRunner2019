@@ -59,12 +59,12 @@ void OnTriggerEnter2D (Collider2D enemyCollision)
 	{
 		if (enemyCollision.gameObject.tag == "Player" && badGuyRight == true) 
 		{
-			playerRB.AddForce (new Vector2 (badGuyForce, badGuyForce / 2));
+			playerRB.AddForce (new Vector2 (0f, 0f));
 		}
 
 		if (enemyCollision.gameObject.tag == "Player" && badGuyRight == false) 
 		{
-			playerRB.AddForce (new Vector2 (-badGuyForce, badGuyForce / 2));
+			playerRB.AddForce (new Vector2 (-0f, 0f));
 		}
 	}
 
